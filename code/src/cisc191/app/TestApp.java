@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+
+import cisc191.app.items.Apple;
+import cisc191.app.items.Chips;
+import cisc191.app.items.Item;
+
 import java.awt.*;
 import java.text.DateFormat;
 import java.time.LocalDate;

@@ -2,6 +2,5 @@ package cisc191.app;
 
 public class ItemPage
 {
-	// This page will hold the pictures of products, as well as options to search
-	JLabel WelcomeLabel = new JLabel("Welcome to our online store! Click on an item, or search to continue");
+	// This part of the page will hold the items to be searched and clicked on
 }

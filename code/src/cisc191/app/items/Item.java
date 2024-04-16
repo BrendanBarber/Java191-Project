@@ -1,4 +1,4 @@
-package cisc191.app;
+package cisc191.app.items;
 
 import java.awt.Image;
 

@@ -1,7 +1,10 @@
-package cisc191.app;
+package cisc191.app.items;
 
 import java.awt.Image;
 import java.time.LocalDate;
+
+import cisc191.app.Deliverable;
+import cisc191.app.PickUpable;
 
 /**
  * @author Ophir Maor
