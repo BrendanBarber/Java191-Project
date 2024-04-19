@@ -12,6 +12,7 @@ import cisc191.app.items.Item;
 import java.awt.*;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * @author Ophir Maor
@@ -86,33 +87,31 @@ class TestApp
 		 assertEquals(apple.checkPerish(LocalDate.parse("2024-05-21")), true);
 	 }
 
-	// @Test
-	// void testCart() {
-	// Cart cart = new Cart();
-	//
-	//
-	// assertEquals(cart.getTotal(), 0);
-	//
-	// Item[] items;
-	// assertEquals(cart.getItems(), items);
-	//
-	// Apple apple = new Apple(null, "Granny Smith Apple", "A tasty green
-	// apple.", 3.99, 16, 0.49);
-	// Chips chips = new Chips(null, "Chips", "These are chips.", 4.99, 12,
-	// 0.49);
-	//
-	// cart.add(apple);
-	//
-	// assertEquals(cart.getTotal(), apple.getPrice());
-	//
-	// cart.add(chips);
-	//
-	// assertEquals(cart.getTotal(), apple.getPrice() + chips.getPrice());
-	//
-	// items = new Item[]{apple, chips};
-	// Assert.assertArrayEquals(cart.getItems(), items);
-	//
-	// }
+	 @Test
+	 void testCart() {
+		 Cart cart = new Cart();
+		
+		
+		 assertEquals(cart.getTotal(), 0);
+		
+		 ArrayList<Item> items = new ArrayList<>();
+		 assertEquals(cart.getItems(), items);
+		
+		 Apple apple = new Apple(null, "Granny Smith Apple", "A tasty green apple.", 3.99, 16);
+		 Chips chips = new Chips(null, "Chips", "These are chips.", 4.99, 12);
+		
+		 cart.addItem(apple);
+		
+		 assertEquals(cart.getTotal(), apple.getPrice());
+		
+		 cart.addItem(chips);
+		
+		 assertEquals(cart.getTotal(), apple.getPrice() + chips.getPrice());
+		
+		 items.add(apple);
+		 items.add(chips);
+		 Assert.assertArrayEquals(cart.getItems().toArray(), items.toArray());
+	 }
 
 	// @Test
 	// void testAppPage() {
