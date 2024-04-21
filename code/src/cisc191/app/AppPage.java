@@ -1,6 +1,13 @@
 package cisc191.app;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * @author Ophir Maor
@@ -20,10 +27,31 @@ import javax.swing.JLabel;
 
 public class AppPage
 {
-	// AppPage has a welcome label
-	private JLabel welcomeLabel;
+	private JFrame frame;
+	private JPanel mainPanel;
 	
-	public AppPage() {
-		this.welcomeLabel = new JLabel("Welcome to our online store! Click on an item, or search to continue");
+	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage) {
+		frame = new JFrame();
+		
+		frame.setTitle("Food App");
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		
+		JPanel topBanner = new JPanel();
+		topBanner.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		
+		ImageDisplay logoPanel = new ImageDisplay(logo);
+		topBanner.add(logoPanel);
+		topBanner.add(searchBar.getPanel());
+		mainPanel.add(topBanner, BorderLayout.NORTH);
+		
+		//mainPanel.add(itemPage.getPanel(), BorderLayout.CENTER);
+		
+		frame.add(mainPanel);
+		frame.setSize(800, 600);
+		frame.setVisible(true);
 	}
 }
