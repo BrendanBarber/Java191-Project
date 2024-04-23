@@ -20,7 +20,7 @@ public class Main
 			e.printStackTrace();
 		}
 		
-		AppPage window = new AppPage(image, new SearchBar(), null);
+		AppPage window = new AppPage(image, new SearchBar(), new ItemPage(), new Cart());
 		
 	}
 }

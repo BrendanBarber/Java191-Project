@@ -1,5 +1,6 @@
 package cisc191.app;
 
+import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -27,7 +28,9 @@ public class SearchBar
 		searchField = new JTextField();
 		searchLabel = new JLabel();
 		
-		searchLabel.setText("Search:");
+		Font bigFont = searchField.getFont().deriveFont(Font.PLAIN, 16f);
+		searchField.setFont(bigFont);
+		searchLabel.setText("Search");
 		searchField.setColumns(20);
 		
 		// https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/events/documentlistener.html

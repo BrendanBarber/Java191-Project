@@ -3,6 +3,7 @@ package cisc191.app;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ public class AppPage
 	private JFrame frame;
 	private JPanel mainPanel;
 	
-	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage) {
+	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage, Cart cart) {
 		frame = new JFrame();
 		
 		frame.setTitle("Food App");
@@ -41,14 +42,15 @@ public class AppPage
 		mainPanel.setLayout(new BorderLayout());
 		
 		JPanel topBanner = new JPanel();
-		topBanner.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		topBanner.setLayout(new GridLayout());
 		
 		ImageDisplay logoPanel = new ImageDisplay(logo);
 		topBanner.add(logoPanel);
 		topBanner.add(searchBar.getPanel());
+		topBanner.add(cart.getPanel());
 		mainPanel.add(topBanner, BorderLayout.NORTH);
 		
-		//mainPanel.add(itemPage.getPanel(), BorderLayout.CENTER);
+		mainPanel.add(itemPage.getPanel(), BorderLayout.CENTER);
 		
 		frame.add(mainPanel);
 		frame.setSize(800, 600);
