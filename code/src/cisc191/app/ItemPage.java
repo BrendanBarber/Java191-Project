@@ -20,29 +20,38 @@ public class ItemPage
 	private JScrollPane scrollPane;
 	private JPanel panel;
 	
-	private HashMap<String, Item> items;
+	private HashMap<Item, Boolean> items;
+	
+	private SearchBar searchBar;
 	
 	public ItemPage() {
 		this.panel = new JPanel(new GridLayout(0, 3));
 		
-		this.items = new HashMap<String, Item>();
+		this.items = new HashMap<Item, Boolean>();
 		
 		// temporary items, will eventually be a external file ---------------------------------
-		addItem(new Apple(null, "Granny Smith Apple 0", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(null, "Granny Smith Apple 1", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(null, "Granny Smith Apple 2", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Granny Smith Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Honeycrisp Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Red Delicious Apple", "A tasty green apple.", 3.99, 16));
 		
-		addItem(new Apple(null, "Granny Smith Apple 3", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(null, "Granny Smith Apple 4", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(null, "Granny Smith Apple 5", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Fuji Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Golden Delicious Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(null, "Gala Apple", "A tasty green apple.", 3.99, 16));
 		
-		addItem(new Chips(null, "Chips 0", "These are chips.", 4.99, 12));
-		addItem(new Chips(null, "Chips 1", "These are chips.", 4.99, 12));
-		addItem(new Chips(null, "Chips 2", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Takis", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Sun Chips", "These are chips.", 4.99, 12));
 		
-		addItem(new Chips(null, "Chips 3", "These are chips.", 4.99, 12));
-		addItem(new Chips(null, "Chips 4", "These are chips.", 4.99, 12));
-		addItem(new Chips(null, "Chips 5", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Lays Original Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Cheetos Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Fritos Chips", "These are chips.", 4.99, 12));
+		
+		addItem(new Chips(null, "Lays BBQ Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Ritz Crackers", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Tortilla Chips", "These are chips.", 4.99, 12));
+		
+		addItem(new Chips(null, "Cheez-its Crackers", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Ruffles Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(null, "Doritos Chips", "These are chips.", 4.99, 12));
 		// --------------------------------------------------------------------------------------
 		
 		createPage();
@@ -50,24 +59,56 @@ public class ItemPage
 		this.scrollPane = new JScrollPane(panel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		panel.setPreferredSize(new Dimension(300, 800));
+		panel.setPreferredSize(new Dimension(300, items.size() * 75));
 	}
 	
 	public void addItem(Item item) {
-		items.put(item.getName(), item);
+		items.put(item, true);
 	}
 	
 	public void createPage() {
-		for(Item item : items.values()) {
+		for(Item item : items.keySet()) {
+			 if(items.get(item) == false) continue;
 			 JPanel boxPanel = new JPanel();
 	         boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	         boxPanel.setBackground(Color.LIGHT_GRAY);
+	         
+	         boxPanel.setPreferredSize(new Dimension(100, 75));
 	         
 	         JLabel label = new JLabel(item.getName(), JLabel.CENTER);
 	         boxPanel.add(label);
 	         
 	         panel.add(boxPanel);
 		}
+	}
+	
+	public void attachSearchBar(SearchBar searchBar) {
+		this.searchBar = searchBar;
+	}
+	
+	public void updatePage() {
+		if(searchBar == null) return;
+		
+		String match = searchBar.getCurrentSearch();
+	
+		int newPanelSize = 0;
+		
+		for(Item item : items.keySet()) {
+			if(item.getName().contains(match)) {
+				items.put(item, true);
+				newPanelSize++;
+			}
+			else {
+				items.put(item, false);
+			}
+		}
+		
+		panel.removeAll();
+		createPage();
+		
+		panel.setPreferredSize(new Dimension(300, newPanelSize * 75));
+		panel.revalidate();
+	    panel.repaint();
 	}
 	
 	public JScrollPane getPanel() {

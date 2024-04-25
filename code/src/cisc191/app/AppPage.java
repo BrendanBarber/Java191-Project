@@ -5,10 +5,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * @author Ophir Maor
@@ -31,6 +34,8 @@ public class AppPage
 	private JFrame frame;
 	private JPanel mainPanel;
 	
+	private Timer timer;
+	
 	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage, Cart cart) {
 		frame = new JFrame();
 		
@@ -52,8 +57,18 @@ public class AppPage
 		
 		mainPanel.add(itemPage.getPanel(), BorderLayout.CENTER);
 		
+		itemPage.attachSearchBar(searchBar);
+		
 		frame.add(mainPanel);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
+		
+		timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                itemPage.updatePage();
+            }
+        });
+        timer.start();
 	}
 }
