@@ -22,6 +22,8 @@ public class ItemPage
 	
 	private HashMap<Item, Boolean> items;
 	
+	private JPanel[][] topSixItemBoxes = new JPanel[3][2];
+	
 	private SearchBar searchBar;
 	
 	public ItemPage() {
@@ -67,6 +69,7 @@ public class ItemPage
 	}
 	
 	public void createPage() {
+		int count = 0;
 		for(Item item : items.keySet()) {
 			 if(items.get(item) == false) continue;
 			 JPanel boxPanel = new JPanel();
@@ -77,6 +80,12 @@ public class ItemPage
 	         
 	         JLabel label = new JLabel(item.getName(), JLabel.CENTER);
 	         boxPanel.add(label);
+	         
+	         // Separates and stores the top 6 search results
+	         if(count < 6) {
+	        	 topSixItemBoxes[count % 3][(int) Math.floor(count / 3)] = boxPanel;
+	        	 count++;
+	         }
 	         
 	         panel.add(boxPanel);
 		}
