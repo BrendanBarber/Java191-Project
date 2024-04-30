@@ -20,7 +20,15 @@ public class Main
 			e.printStackTrace();
 		}
 		
-		AppPage window = new AppPage(image, new SearchBar(), new ItemPage(), new Cart());
+		try
+		{
+			AppPage window = new AppPage(image, new SearchBar(), new ItemPage(), new Cart());
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }
