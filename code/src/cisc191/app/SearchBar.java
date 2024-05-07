@@ -11,14 +11,33 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+/**
+ * @author Ophir Maor
+ * @author Brendan Barber
+ *
+ *         References:
+ *         Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented
+ *         Problem Solving.
+ *         Retrieved from
+ *         https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ *         Version/date: 4/14/2024
+ * 
+ *         Responsibilities of class:
+ *         Contains methods used by PickUpable items
+ */
+
 public class SearchBar
 {
-	
+	// SearchBar has a panel
 	private JPanel panel;
+	// SearchBar has a searchField
 	private JTextField searchField;
+	// SearchBar has a searchLabel
 	private JLabel searchLabel;
-	
+	// SearchBar has a search
 	private String search;
+	// SearchBar has a changed
 	private boolean changed;
 	
 	public SearchBar() {
@@ -33,6 +52,7 @@ public class SearchBar
 		searchLabel.setText("Search");
 		searchField.setColumns(20);
 		
+		// Update search string when input is changed
 		// https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/events/documentlistener.html
 		searchField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override

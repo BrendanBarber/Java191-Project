@@ -31,12 +31,15 @@ import javax.swing.Timer;
 
 public class AppPage
 {
+	// AppPage has a frame
 	private JFrame frame;
+	// AppPage has a main panel
 	private JPanel mainPanel;
-	
+	// AppPage has a timer
 	private Timer timer;
 	
 	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage, Cart cart) {
+		// Create the JFrame
 		frame = new JFrame();
 		
 		frame.setTitle("Food App");
@@ -46,6 +49,7 @@ public class AppPage
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		
+		// Top banner containing search bar, logo, and cart button
 		JPanel topBanner = new JPanel();
 		topBanner.setLayout(new GridLayout());
 		
@@ -63,6 +67,7 @@ public class AppPage
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		
+		// Updates page periodically
 		timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

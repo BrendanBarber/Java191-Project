@@ -17,19 +17,39 @@ import cisc191.app.items.Apple;
 import cisc191.app.items.Chips;
 import cisc191.app.items.Item;
 
+/**
+ * @author Ophir Maor
+ * @author Brendan Barber
+ *
+ *         References:
+ *         Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented
+ *         Problem Solving.
+ *         Retrieved from
+ *         https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ *         Version/date: 4/14/2024
+ * 
+ *         Responsibilities of class:
+ *         Represents the windows as a whole
+ */
+
 public class ItemPage
 {
-	
+	// ItemPage has a cart
+	private Cart cart;
+	// ItemPage has a scrollPane
 	private JScrollPane scrollPane;
+	// ItemPage has a panel
 	private JPanel panel;
-	
+	// ItemPage has many items that are visible or not
 	private HashMap<Item, Boolean> items;
-	
+	// ItemPage has the topSix query responses
 	private JPanel[][] topSixItemBoxes = new JPanel[3][2];
-	
+	// ItemPage has a searchBar
 	private SearchBar searchBar;
 	
-	public ItemPage() throws IOException {
+	public ItemPage(Cart cart) throws IOException {
+		this.cart = cart;
 		this.panel = new JPanel(new GridLayout(0, 3));
 		
 		this.items = new HashMap<Item, Boolean>();
@@ -73,9 +93,12 @@ public class ItemPage
 	
 	public void createPage() {
 		int count = 0;
+		// for each item in keyset
 		for(Item item : items.keySet()) {
+			 // if item is invisible, continue
 			 if(items.get(item) == false) continue;
-			 JPanel boxPanel = new ItemBox(item);
+			 // Create the ItemBox panel for the item
+			 JPanel boxPanel = new ItemBox(item, cart);
 	         boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	         boxPanel.setBackground(Color.LIGHT_GRAY);
 	         boxPanel.setPreferredSize(new Dimension(100, 75));
@@ -101,6 +124,7 @@ public class ItemPage
 	
 		int newPanelSize = 0;
 		
+		// Check if item name contains the string searched
 		for(Item item : items.keySet()) {
 			if(item.getName().contains(match)) {
 				items.put(item, true);
@@ -111,9 +135,11 @@ public class ItemPage
 			}
 		}
 		
+		// Clear and recreate page with only matched items
 		panel.removeAll();
 		createPage();
 		
+		// Resize panel so that boxes aren't stretched
 		panel.setPreferredSize(new Dimension(300, newPanelSize * 75));
 		panel.revalidate();
 	    panel.repaint();

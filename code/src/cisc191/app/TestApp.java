@@ -112,15 +112,4 @@ class TestApp
 		 items.add(chips);
 		 Assert.assertArrayEquals(cart.getItems().toArray(), items.toArray());
 	 }
-
-	// @Test
-	// void testAppPage() {
-	// AppPage appPage = new AppPage();
-	// }
-
-	// @Test
-	// void testSearchBar() {
-	// SearchBar searchBar = new SearchBar();
-	// }
-
 }

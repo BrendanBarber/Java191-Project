@@ -23,12 +23,14 @@ import cisc191.app.Perishable;
  *         Represents an Apple item in the app
  */
 
-public class Apple extends Item implements Deliverable, Perishable
+public class Apple extends Item implements Deliverable, Perishable // is an Item, is Deliverable, is Perishable
 {
-
+	// Apple has an arrivalTime
 	private LocalDate arrivalTime;
+	// Apple has a deliveryCost
 	private double deliveryCost;
 	
+	// Apple has a perishDate
 	private LocalDate perishDate;
 	
 	public Apple(Image image, String name, String description, double price,

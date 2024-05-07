@@ -22,12 +22,13 @@ import cisc191.app.PickUpable;
  *         Represents a Chips item in the app
  */
 
-public class Chips extends Item implements Deliverable, PickUpable
+public class Chips extends Item implements Deliverable, PickUpable // is an Item, is Deliverable, is PickUpable
 {	
-	
+	// Chips has a readyTime
 	private LocalDate readyTime;
+	// Chips has a deliveryCost
 	private double deliveryCost;
-	
+	// Chips has an arrivalTime
 	private LocalDate arrivalTime;
 	
 	public Chips(Image image, String name, String description, double price,
