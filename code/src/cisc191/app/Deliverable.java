@@ -21,10 +21,10 @@ import java.time.LocalDate;
 public interface Deliverable
 {
 	void setDeliveryCost(double cost);
-	
+
 	void setArrivalTime(LocalDate date);
-	
+
 	LocalDate getArrivalTime();
-	
+
 	double getDeliveryCost();
 }

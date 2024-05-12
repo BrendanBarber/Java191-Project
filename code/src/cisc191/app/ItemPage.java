@@ -47,106 +47,138 @@ public class ItemPage
 	private JPanel[][] topSixItemBoxes = new JPanel[3][2];
 	// ItemPage has a searchBar
 	private SearchBar searchBar;
-	
-	public ItemPage(Cart cart) throws IOException {
+
+	public ItemPage(Cart cart) throws IOException
+	{
 		this.cart = cart;
 		this.panel = new JPanel(new GridLayout(0, 3));
-		
+
 		this.items = new HashMap<Item, Boolean>();
-		
-		// temporary items, will eventually be a external file ---------------------------------
-		addItem(new Apple(ImageIO.read(new File("grannysmith.png")), "Granny Smith Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("honeycrisp.png")), "Honeycrisp Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("reddelicious.png")), "Red Delicious Apple", "A tasty green apple.", 3.99, 16));
-		
-		addItem(new Apple(ImageIO.read(new File("fuji.png")), "Fuji Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("goldendelicious.png")), "Golden Delicious Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("gala.png")), "Gala Apple", "A tasty green apple.", 3.99, 16));
-		
-		addItem(new Chips(ImageIO.read(new File("takis.png")), "Takis", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("sunchips.png")), "Sun Chips", "These are chips.", 4.99, 12));
-		
-		addItem(new Chips(ImageIO.read(new File("lays.png")), "Lays Original Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("cheetos.png")), "Cheetos Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("fritos.png")), "Fritos Chips", "These are chips.", 4.99, 12));
-		
-		addItem(new Chips(ImageIO.read(new File("bbq.png")), "Lays BBQ Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("ritz.png")), "Ritz Crackers", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("tostitos.png")), "Tostitos Chips", "These are chips.", 4.99, 12));
-		
-		addItem(new Chips(ImageIO.read(new File("cheezits.jpg")), "Cheez-its Crackers", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("ruffles.png")), "Ruffles Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("doritos.jpg")), "Doritos Chips", "These are chips.", 4.99, 12));
+
+		// temporary items, will eventually be a external file
+		// ---------------------------------
+		addItem(new Apple(ImageIO.read(new File("grannysmith.png")),
+				"Granny Smith Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(ImageIO.read(new File("honeycrisp.png")),
+				"Honeycrisp Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(ImageIO.read(new File("reddelicious.png")),
+				"Red Delicious Apple", "A tasty green apple.", 3.99, 16));
+
+		addItem(new Apple(ImageIO.read(new File("fuji.png")), "Fuji Apple",
+				"A tasty green apple.", 3.99, 16));
+		addItem(new Apple(ImageIO.read(new File("goldendelicious.png")),
+				"Golden Delicious Apple", "A tasty green apple.", 3.99, 16));
+		addItem(new Apple(ImageIO.read(new File("gala.png")), "Gala Apple",
+				"A tasty green apple.", 3.99, 16));
+
+		addItem(new Chips(ImageIO.read(new File("takis.png")), "Takis",
+				"These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("sunchips.png")), "Sun Chips",
+				"These are chips.", 4.99, 12));
+
+		addItem(new Chips(ImageIO.read(new File("lays.png")),
+				"Lays Original Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("cheetos.png")),
+				"Cheetos Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("fritos.png")), "Fritos Chips",
+				"These are chips.", 4.99, 12));
+
+		addItem(new Chips(ImageIO.read(new File("bbq.png")), "Lays BBQ Chips",
+				"These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("ritz.png")), "Ritz Crackers",
+				"These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("tostitos.png")),
+				"Tostitos Chips", "These are chips.", 4.99, 12));
+
+		addItem(new Chips(ImageIO.read(new File("cheezits.jpg")),
+				"Cheez-its Crackers", "These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("ruffles.png")),
+				"Ruffles Chips", "These are chips.", 4.99, 12));
+		addItem(new Chips(ImageIO.read(new File("doritos.jpg")),
+				"Doritos Chips", "These are chips.", 4.99, 12));
 		// --------------------------------------------------------------------------------------
-		
+
 		createPage();
-		
+
 		this.scrollPane = new JScrollPane(panel);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panel.setPreferredSize(new Dimension(300, items.size() * 75));
 	}
-	
-	public void addItem(Item item) {
+
+	public void addItem(Item item)
+	{
 		items.put(item, true);
 	}
-	
-	public void createPage() {
+
+	public void createPage()
+	{
 		int count = 0;
 		// for each item in keyset
-		for(Item item : items.keySet()) {
-			 // if item is invisible, continue
-			 if(items.get(item) == false) continue;
-			 // Create the ItemBox panel for the item
-			 JPanel boxPanel = new ItemBox(item, cart);
-	         boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	         boxPanel.setBackground(Color.LIGHT_GRAY);
-	         boxPanel.setPreferredSize(new Dimension(100, 75));
-	         
-	         // Separates and stores the top 6 search results
-	         if(count < 6) {
-	        	 topSixItemBoxes[count % 3][(int) Math.floor(count / 3)] = boxPanel;
-	        	 count++;
-	         }
-	         
-	         panel.add(boxPanel);
+		for (Item item : items.keySet())
+		{
+			// if item is invisible, continue
+			if (items.get(item) == false) continue;
+			// Create the ItemBox panel for the item
+			JPanel boxPanel = new ItemBox(item, cart);
+			boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			boxPanel.setBackground(Color.LIGHT_GRAY);
+			boxPanel.setPreferredSize(new Dimension(100, 75));
+
+			// Separates and stores the top 6 search results
+			if (count < 6)
+			{
+				topSixItemBoxes[count % 3][(int) Math
+						.floor(count / 3)] = boxPanel;
+				count++;
+			}
+
+			panel.add(boxPanel);
 		}
 	}
-	
-	public void attachSearchBar(SearchBar searchBar) {
+
+	public void attachSearchBar(SearchBar searchBar)
+	{
 		this.searchBar = searchBar;
 	}
-	
-	public void updatePage() {
-		if(searchBar == null) return;
-		
+
+	public void updatePage()
+	{
+		if (searchBar == null) return;
+
 		String match = searchBar.getCurrentSearch();
-	
+
 		int newPanelSize = 0;
-		
+
 		// Check if item name contains the string searched
-		for(Item item : items.keySet()) {
-			if(item.getName().contains(match)) {
+		for (Item item : items.keySet())
+		{
+			if (item.getName().contains(match))
+			{
 				items.put(item, true);
 				newPanelSize++;
 			}
-			else {
+			else
+			{
 				items.put(item, false);
 			}
 		}
-		
+
 		// Clear and recreate page with only matched items
 		panel.removeAll();
 		createPage();
-		
+
 		// Resize panel so that boxes aren't stretched
 		panel.setPreferredSize(new Dimension(300, newPanelSize * 75));
 		panel.revalidate();
-	    panel.repaint();
+		panel.repaint();
 	}
-	
-	public JScrollPane getPanel() {
+
+	public JScrollPane getPanel()
+	{
 		return scrollPane;
 	}
-	
+
 }

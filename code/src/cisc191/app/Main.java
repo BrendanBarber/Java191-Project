@@ -24,7 +24,8 @@ import javax.imageio.ImageIO;
 
 public class Main
 {
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		Image image = null;
 		// try to load the logo image
 		try
@@ -35,19 +36,21 @@ public class Main
 		{
 			e.printStackTrace();
 		}
-		
+
 		// create the cart so that it can be passed into multiple places
 		Cart cart = new Cart();
-		
-		// Try to create the window, errors are usually due to images not loading
+
+		// Try to create the window, errors are usually due to images not
+		// loading
 		try
 		{
-			AppPage window = new AppPage(image, new SearchBar(), new ItemPage(cart), cart);
+			AppPage window = new AppPage(image, new SearchBar(),
+					new ItemPage(cart), cart);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		
+
 	}
 }

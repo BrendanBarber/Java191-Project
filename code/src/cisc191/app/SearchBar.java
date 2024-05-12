@@ -39,62 +39,73 @@ public class SearchBar
 	private String search;
 	// SearchBar has a changed
 	private boolean changed;
-	
-	public SearchBar() {
+
+	public SearchBar()
+	{
 		panel = new JPanel();
-		
+
 		search = "";
 		searchField = new JTextField();
 		searchLabel = new JLabel();
-		
+
 		Font bigFont = searchField.getFont().deriveFont(Font.PLAIN, 16f);
 		searchField.setFont(bigFont);
 		searchLabel.setText("Search");
 		searchField.setColumns(20);
-		
+
 		// Update search string when input is changed
 		// https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/events/documentlistener.html
-		searchField.getDocument().addDocumentListener(new DocumentListener() {
+		searchField.getDocument().addDocumentListener(new DocumentListener()
+		{
 			@Override
-            public void insertUpdate(DocumentEvent e) {
-                updateSearch();
-            }
+			public void insertUpdate(DocumentEvent e)
+			{
+				updateSearch();
+			}
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                updateSearch();
-            }
+			@Override
+			public void removeUpdate(DocumentEvent e)
+			{
+				updateSearch();
+			}
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                updateSearch();
-            }
+			@Override
+			public void changedUpdate(DocumentEvent e)
+			{
+				updateSearch();
+			}
 		});
-		
+
 		panel.add(searchLabel);
 		panel.add(searchField);
 	}
-	
-	private void updateSearch() {
-		if(search != searchField.getText()) {
+
+	private void updateSearch()
+	{
+		if (search != searchField.getText())
+		{
 			search = searchField.getText();
 			changed = true;
 		}
 	}
-	
-	public JPanel getPanel() {
+
+	public JPanel getPanel()
+	{
 		return panel;
 	}
-	
-	public String getCurrentSearch() {
+
+	public String getCurrentSearch()
+	{
 		return search;
 	}
-	
-	public boolean isChanged() {
+
+	public boolean isChanged()
+	{
 		return changed;
 	}
-	
-	public void setChanged(boolean change) {
+
+	public void setChanged(boolean change)
+	{
 		this.changed = change;
 	}
 }

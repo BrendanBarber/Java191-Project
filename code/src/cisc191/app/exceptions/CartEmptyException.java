@@ -18,7 +18,8 @@ package cisc191.app.exceptions;
 
 public class CartEmptyException extends Exception // is an Exception
 {
-	public CartEmptyException() {
+	public CartEmptyException()
+	{
 		super("The cart is empty");
 	}
 }

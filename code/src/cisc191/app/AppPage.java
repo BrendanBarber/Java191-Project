@@ -37,43 +37,47 @@ public class AppPage
 	private JPanel mainPanel;
 	// AppPage has a timer
 	private Timer timer;
-	
-	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage, Cart cart) {
+
+	public AppPage(Image logo, SearchBar searchBar, ItemPage itemPage,
+			Cart cart)
+	{
 		// Create the JFrame
 		frame = new JFrame();
-		
+
 		frame.setTitle("Food App");
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
-		
+
 		// Top banner containing search bar, logo, and cart button
 		JPanel topBanner = new JPanel();
 		topBanner.setLayout(new GridLayout());
-		
+
 		ImageDisplay logoPanel = new ImageDisplay(logo);
 		topBanner.add(logoPanel);
 		topBanner.add(searchBar.getPanel());
 		topBanner.add(cart.getPanel());
 		mainPanel.add(topBanner, BorderLayout.NORTH);
-		
+
 		mainPanel.add(itemPage.getPanel(), BorderLayout.CENTER);
-		
+
 		itemPage.attachSearchBar(searchBar);
-		
+
 		frame.add(mainPanel);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
-		
+
 		// Updates page periodically
-		timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                itemPage.updatePage();
-            }
-        });
-        timer.start();
+		timer = new Timer(1000, new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				itemPage.updatePage();
+			}
+		});
+		timer.start();
 	}
 }

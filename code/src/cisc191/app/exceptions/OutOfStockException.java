@@ -20,7 +20,8 @@ import cisc191.app.items.Item;
 
 public class OutOfStockException extends Exception // is an Exception
 {
-	public OutOfStockException(Item item) {
+	public OutOfStockException(Item item)
+	{
 		super("Item '" + item.getName() + "' is out of stock");
 	}
 }

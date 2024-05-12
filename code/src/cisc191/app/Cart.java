@@ -1,17 +1,33 @@
 package cisc191.app;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import cisc191.app.items.Item;
 
@@ -41,97 +57,199 @@ public class Cart
 	private JPanel cartPanel;
 	// Cart has a button
 	private JButton cartButton;
-	
-	public Cart() {
+
+	public Cart()
+	{
 		this.items = new ArrayList<>();
-		
+
 		this.cartPanel = new JPanel();
 		this.cartButton = new JButton();
 		cartButton.setText("Cart");
 		cartButton.setPreferredSize(new Dimension(128, 32));
-		
+
 		// Button clicked, run method
-		cartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCartButtonClick();
-            }
-        });
-		
+		cartButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				onCartButtonClick();
+			}
+		});
+
 		cartPanel.add(cartButton);
 	}
-	
-	public void onCartButtonClick() {
-        // Create a new window
-        JFrame newWindow = new JFrame("Cart Details");
-        newWindow.setSize(300, 200);
-        newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        
-        // Create a text label with some temporary simple cart information
-        JLabel infoLabel = new JLabel("Your cart has " + items.size() + " items. Total: $" + total);
-        infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        mainPanel.add(infoLabel, BorderLayout.CENTER);
-        
-        // TODO Have a list of all items with the ability to remove items
-        
-        // Panel for the buttons
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        
-        // Exit button
-        JButton goBackButton = new JButton("Go back");
-        goBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Close the window when exit is clicked
-                newWindow.dispose();
-            }
-        });
-        buttonPanel.add(goBackButton);
-        
-        // Create the checkout button
-        JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	System.exit(0);
-            }
-        });
-        buttonPanel.add(checkoutButton);
-        
-        
-        mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
-        newWindow.add(mainPanel);
-        
-        // Make the new window visible
-        newWindow.setVisible(true);
-    }
-	
-	public ArrayList<Item> getItems() {
+
+	public void onCartButtonClick()
+	{
+		// Create a new window
+		JFrame newWindow = new JFrame("Cart Details");
+		newWindow.setSize(300, 200);
+		newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		// Cart total price
+		JLabel infoLabel = new JLabel("Total: $" + 0);
+		;
+
+		Map<String, Integer> itemCountMap = new HashMap<>();
+		for (Item item : items)
+		{
+			String itemName = item.getName();
+			// Increment occurrence count for item name
+			itemCountMap.put(itemName,
+					itemCountMap.getOrDefault(itemName, 0) + 1);
+		}
+
+		// Have a list of all items with the ability to remove items
+		Set<String> uniqueItemNames = new HashSet<>();
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (Item item : items)
+		{
+			String itemName = item.getName();
+			int itemCount = itemCountMap.get(itemName);
+			// if the item name is not in the set, add it to the list model
+			if (!uniqueItemNames.contains(itemName))
+			{
+				uniqueItemNames.add(itemName);
+				// if there is more than one item with the same name, append
+				// "xN"
+				itemName += " x" + itemCount;
+				listModel.addElement(itemName);
+			}
+		}
+
+		JList<String> itemList = new JList<>(listModel);
+		itemList.setCellRenderer(new CartItemDisplay());
+		// Add ListSelectionListener to handle item removal
+		itemList.addListSelectionListener(new ListSelectionListener()
+		{
+			@Override
+			public void valueChanged(ListSelectionEvent e)
+			{
+				if (!e.getValueIsAdjusting())
+				{
+					// get the selected list item to remove
+					int selectedIndex = itemList.getSelectedIndex();
+					if (selectedIndex != -1)
+					{
+						// get the name of the item
+						String itemName = listModel.get(selectedIndex);
+						String shortName = itemName.substring(0,
+								itemName.lastIndexOf(" x"));
+
+						// recalculation of total once removed
+						double newTotal = 0;
+
+						// iterate through until the item to remove is found
+						Iterator<Item> iterator = items.iterator();
+						while (iterator.hasNext())
+						{
+							Item item = iterator.next();
+							if (item.getName().equals(shortName))
+							{
+								iterator.remove(); // Safely remove the item
+								continue;
+							}
+							// add to total
+							newTotal += item.getPrice();
+						}
+						// remove list item
+						listModel.remove(selectedIndex);
+						// update the total globally
+						updateTotal();
+
+						// remake total label
+						DecimalFormat decimalFormat = new DecimalFormat("#.##");
+						String roundedTotal = decimalFormat.format(newTotal);
+						infoLabel.setText("Total: $" + roundedTotal);
+
+					}
+				}
+			}
+		});
+
+		JScrollPane scrollPane = new JScrollPane(itemList);
+		mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+		// Format the total and set it
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		String roundedTotal = decimalFormat.format(total);
+		infoLabel.setText("Total: $" + roundedTotal);
+		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		mainPanel.add(infoLabel, BorderLayout.NORTH);
+
+		// Panel for the buttons
+		JPanel buttonPanel = new JPanel(new FlowLayout());
+
+		// Exit button
+		JButton goBackButton = new JButton("Go back");
+		goBackButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				// Close the window when exit is clicked
+				newWindow.dispose();
+			}
+		});
+		buttonPanel.add(goBackButton);
+
+		// Create the checkout button
+		JButton checkoutButton = new JButton("Checkout");
+		checkoutButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+		});
+		buttonPanel.add(checkoutButton);
+
+		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+		newWindow.add(mainPanel);
+
+		// Make the new window visible
+		newWindow.setVisible(true);
+	}
+
+	public ArrayList<Item> getItems()
+	{
 		return items;
 	}
-	
-	public JPanel getPanel() {
+
+	public JPanel getPanel()
+	{
 		return cartPanel;
 	}
-	
-	private void updateTotal() {
+
+	private void updateTotal()
+	{
 		total = 0;
-		for(Item item : items) {
+		for (Item item : items)
+		{
 			total += item.getPrice();
 		}
 	}
-	
-	public void addItem(Item item) {
+
+	public void addItem(Item item)
+	{
 		items.add(item);
-		
+
 		updateTotal();
 	}
-	
-	public double getTotal() {
+
+	public void removeItem(Item item)
+	{
+		if (item == null) return;
+		items.remove(item);
+	}
+
+	public double getTotal()
+	{
 		return total;
 	}
-	
+
 }

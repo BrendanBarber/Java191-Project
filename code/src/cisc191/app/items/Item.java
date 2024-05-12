@@ -67,7 +67,8 @@ public class Item
 		return stock;
 	}
 
-	public void removeFromStock() {
+	public void removeFromStock()
+	{
 		stock--;
 	}
 }
