@@ -112,4 +112,19 @@ class TestApp
 		 items.add(chips);
 		 Assert.assertArrayEquals(cart.getItems().toArray(), items.toArray());
 	 }
+	Test
+  	public void testImageLoading() 
+	{
+		// Tests that random pictures load
+        	// Load images
+        	BufferedImage image1 = loadImage("grannysmith.png");
+      	    	BufferedImage image2 = loadImage("doritos.png");
+      	    	BufferedImage image3 = loadImage("lays.png");
+
+		// Assert that images are not null
+            	assertNotNull(image1);
+		assertNotNull(image2);
+    		assertNotNull(image);
+
+
 }
