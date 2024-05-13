@@ -82,7 +82,7 @@ public class SearchBar
 
 	private void updateSearch()
 	{
-		if (search != searchField.getText())
+		if (!search.equals(searchField.getText()))
 		{
 			search = searchField.getText();
 			changed = true;
