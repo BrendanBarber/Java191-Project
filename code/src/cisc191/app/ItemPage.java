@@ -92,8 +92,7 @@ public class ItemPage
 			// Separates and stores the top 6 search results
 			if (count < 6)
 			{
-				topSixItemBoxes[count % 3][(int) Math
-						.floor(count / 3)] = boxPanel;
+				topSixItemBoxes[count % 3][(int) Math.floor(count / 3)] = boxPanel;
 				count++;
 			}
 
