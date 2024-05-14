@@ -1,5 +1,6 @@
 package cisc191.app;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Assert;
@@ -10,9 +11,14 @@ import cisc191.app.items.Chips;
 import cisc191.app.items.Item;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * @author Ophir Maor
@@ -101,19 +107,21 @@ class TestApp
 		 items.add(chips);
 		 Assert.assertArrayEquals(cart.getItems().toArray(), items.toArray());
 	 }
-	Test
-  	public void testImageLoading() 
+	 
+	@Test
+	public void testImageLoading() throws IOException
 	{
 		// Tests that random pictures load
-        	// Load images
-        	BufferedImage image1 = loadImage("grannysmith.png");
-      	    	BufferedImage image2 = loadImage("doritos.png");
-      	    	BufferedImage image3 = loadImage("lays.png");
+		// Load images
+		BufferedImage image1 = ImageIO.read(new File("doritos.jpg"));
+		BufferedImage image2 = ImageIO.read(new File("lays.png"));
+		BufferedImage image3 = ImageIO.read(new File("fuji.png"));
 
 		// Assert that images are not null
-            	assertNotNull(image1);
+		assertNotNull(image1);
 		assertNotNull(image2);
-    		assertNotNull(image);
-
+		assertNotNull(image3);
+	}
 
 }
+	
