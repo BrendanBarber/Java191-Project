@@ -60,49 +60,6 @@ public class ItemPage
 		
 		loadStock("storeStock.json");
 
-		/*// temporary items, will eventually be a external file
-		// ---------------------------------
-		addItem(new Apple(ImageIO.read(new File("grannysmith.png")),
-				"Granny Smith Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("honeycrisp.png")),
-				"Honeycrisp Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("reddelicious.png")),
-				"Red Delicious Apple", "A tasty green apple.", 3.99, 16));
-
-		addItem(new Apple(ImageIO.read(new File("fuji.png")), "Fuji Apple",
-				"A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("goldendelicious.png")),
-				"Golden Delicious Apple", "A tasty green apple.", 3.99, 16));
-		addItem(new Apple(ImageIO.read(new File("gala.png")), "Gala Apple",
-				"A tasty green apple.", 3.99, 16));
-
-		addItem(new Chips(ImageIO.read(new File("takis.png")), "Takis",
-				"These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("sunchips.png")), "Sun Chips",
-				"These are chips.", 4.99, 12));
-
-		addItem(new Chips(ImageIO.read(new File("lays.png")),
-				"Lays Original Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("cheetos.png")),
-				"Cheetos Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("fritos.png")), "Fritos Chips",
-				"These are chips.", 4.99, 12));
-
-		addItem(new Chips(ImageIO.read(new File("bbq.png")), "Lays BBQ Chips",
-				"These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("ritz.png")), "Ritz Crackers",
-				"These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("tostitos.png")),
-				"Tostitos Chips", "These are chips.", 4.99, 12));
-
-		addItem(new Chips(ImageIO.read(new File("cheezits.jpg")),
-				"Cheez-its Crackers", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("ruffles.png")),
-				"Ruffles Chips", "These are chips.", 4.99, 12));
-		addItem(new Chips(ImageIO.read(new File("doritos.jpg")),
-				"Doritos Chips", "These are chips.", 4.99, 12));
-		// --------------------------------------------------------------------------------------*/
-
 		createPage();
 
 		this.scrollPane = new JScrollPane(panel);
