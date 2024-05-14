@@ -213,10 +213,12 @@ public class Cart
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				try {
+				try 
+				{
 					checkOut();
 				}
-				catch(CartEmptyException e1) {
+				catch(CartEmptyException e1) 
+				{
 					// Error message for when cart is empty
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
 							"Error", JOptionPane.ERROR_MESSAGE);
@@ -251,48 +253,63 @@ public class Cart
 		newWindow.setVisible(true);
 	}
 	
-	private void updateIcons() {
+	private void updateIcons() 
+	{
 		boolean[] iconVisible = {false, false, false};
 		
-		for(Item item : getItems()) {
-			if(item instanceof Deliverable) {
+		for(Item item : getItems()) 
+		{
+			if(item instanceof Deliverable) 
+			{
 				iconVisible[0] = true;
 			}
-			if(item instanceof PickUpable) {
+			if(item instanceof PickUpable) 
+			{
 				iconVisible[1] = true;
 			}
-			if(item instanceof Perishable) {
+			if(item instanceof Perishable) 
+			{
 				iconVisible[2] = true;
 			}
 		}
 		
 		// update icons
-		if(iconVisible[0] == true) {
+		if(iconVisible[0] == true) 
+		{
 			deliverableButton.setBackground(Color.GREEN);
 		}
-		else {
+		else
+		{
 			deliverableButton.setBackground(Color.GRAY);
 		}
-		if(iconVisible[1] == true) {
+		
+		if(iconVisible[1] == true) 
+		{
 			pickupableButton.setBackground(Color.GREEN);
 		}
-		else {
+		else 
+		{
 			pickupableButton.setBackground(Color.GRAY);
 		}
-		if(iconVisible[2] == true) {
+		
+		if(iconVisible[2] == true)
+		{
 			perishableButton.setBackground(Color.GREEN);
 		}
-		else {
+		else 
+		{
 			perishableButton.setBackground(Color.GRAY);
 		}
 	}
 	
 	private void checkOut() throws CartEmptyException 
 	{
-		if(getItems().size() > 0) {
+		if(getItems().size() > 0)
+		{
 			System.exit(0);
 		}
-		else {
+		else
+		{
 			throw new CartEmptyException();
 		}
 	}
