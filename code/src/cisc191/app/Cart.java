@@ -23,12 +23,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import cisc191.app.exceptions.CartEmptyException;
 import cisc191.app.items.Item;
 
 /**
@@ -57,6 +59,12 @@ public class Cart
 	private JPanel cartPanel;
 	// Cart has a button
 	private JButton cartButton;
+	
+	// Icons
+	private JPanel iconPanel;
+	private JButton deliverableButton;
+	private JButton pickupableButton;
+	private JButton perishableButton;
 
 	public Cart()
 	{
@@ -84,7 +92,7 @@ public class Cart
 	{
 		// Create a new window
 		JFrame newWindow = new JFrame("Cart Details");
-		newWindow.setSize(300, 200);
+		newWindow.setSize(600, 400);
 		newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
@@ -164,7 +172,9 @@ public class Cart
 						DecimalFormat decimalFormat = new DecimalFormat("#.##");
 						String roundedTotal = decimalFormat.format(newTotal);
 						infoLabel.setText("Total: $" + roundedTotal);
-
+						
+						// update icons
+						updateIcons();
 					}
 				}
 			}
@@ -203,16 +213,88 @@ public class Cart
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.exit(0);
+				try {
+					checkOut();
+				}
+				catch(CartEmptyException e1) {
+					// Error message for when cart is empty
+					JOptionPane.showMessageDialog(null, e1.getMessage(),
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		buttonPanel.add(checkoutButton);
+		
+		// Icons for interfaces
+		iconPanel = new JPanel(new FlowLayout());
 
+		// Create and add disabled buttons to the icon panel
+		deliverableButton = new JButton("Deliverable");
+		deliverableButton.setEnabled(false);
+		iconPanel.add(deliverableButton);
+
+		pickupableButton = new JButton("Pickupable");
+		pickupableButton.setEnabled(false);
+		iconPanel.add(pickupableButton);
+
+		perishableButton = new JButton("Perishable");
+		perishableButton.setEnabled(false);
+		iconPanel.add(perishableButton);
+
+		updateIcons();
+		
+		buttonPanel.add(iconPanel);
 		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 		newWindow.add(mainPanel);
 
 		// Make the new window visible
 		newWindow.setVisible(true);
+	}
+	
+	private void updateIcons() {
+		boolean[] iconVisible = {false, false, false};
+		
+		for(Item item : getItems()) {
+			if(item instanceof Deliverable) {
+				iconVisible[0] = true;
+			}
+			if(item instanceof PickUpable) {
+				iconVisible[1] = true;
+			}
+			if(item instanceof Perishable) {
+				iconVisible[2] = true;
+			}
+		}
+		
+		// update icons
+		if(iconVisible[0] == true) {
+			deliverableButton.setBackground(Color.GREEN);
+		}
+		else {
+			deliverableButton.setBackground(Color.GRAY);
+		}
+		if(iconVisible[1] == true) {
+			pickupableButton.setBackground(Color.GREEN);
+		}
+		else {
+			pickupableButton.setBackground(Color.GRAY);
+		}
+		if(iconVisible[2] == true) {
+			perishableButton.setBackground(Color.GREEN);
+		}
+		else {
+			perishableButton.setBackground(Color.GRAY);
+		}
+	}
+	
+	private void checkOut() throws CartEmptyException 
+	{
+		if(getItems().size() > 0) {
+			System.exit(0);
+		}
+		else {
+			throw new CartEmptyException();
+		}
 	}
 
 	public ArrayList<Item> getItems()

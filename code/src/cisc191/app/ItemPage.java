@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -54,8 +57,10 @@ public class ItemPage
 		this.panel = new JPanel(new GridLayout(0, 3));
 
 		this.items = new HashMap<Item, Boolean>();
+		
+		loadStock("storeStock.json");
 
-		// temporary items, will eventually be a external file
+		/*// temporary items, will eventually be a external file
 		// ---------------------------------
 		addItem(new Apple(ImageIO.read(new File("grannysmith.png")),
 				"Granny Smith Apple", "A tasty green apple.", 3.99, 16));
@@ -96,7 +101,7 @@ public class ItemPage
 				"Ruffles Chips", "These are chips.", 4.99, 12));
 		addItem(new Chips(ImageIO.read(new File("doritos.jpg")),
 				"Doritos Chips", "These are chips.", 4.99, 12));
-		// --------------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------*/
 
 		createPage();
 
@@ -175,6 +180,39 @@ public class ItemPage
 		panel.revalidate();
 		panel.repaint();
 	}
+	
+	public void loadStock(String fileName) {
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(fileName)) {
+            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+
+            // Extract Apples, iterate through each in the json, extract the needed information, and then create an object
+            JsonArray applesArray = jsonObject.getAsJsonArray("Apples");
+            for (JsonElement appleElement : applesArray) {
+                JsonObject apple = appleElement.getAsJsonObject();
+                for (Map.Entry<String, JsonElement> key : apple.entrySet()) {
+                    JsonObject details = key.getValue().getAsJsonObject();
+                    addItem(new Apple(ImageIO.read(new File(details.get("image_file").getAsString())),
+                            key.getKey(), details.get("description").getAsString(),
+                            details.get("price").getAsDouble(), details.get("stock").getAsInt()));
+                }
+            }
+
+            // Extract Chips, iterate through each in the json, extract the needed information, and then create an object
+            JsonArray chipsArray = jsonObject.getAsJsonArray("Chips");
+            for (JsonElement chipsElement : chipsArray) {
+                JsonObject chips = chipsElement.getAsJsonObject();
+                for (Map.Entry<String, JsonElement> key : chips.entrySet()) {
+                    JsonObject details = key.getValue().getAsJsonObject();
+                    addItem(new Chips(ImageIO.read(new File(details.get("image_file").getAsString())),
+                    		key.getKey(), details.get("description").getAsString(),
+                            details.get("price").getAsDouble(), details.get("stock").getAsInt()));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public JScrollPane getPanel()
 	{

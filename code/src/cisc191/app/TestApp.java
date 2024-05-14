@@ -33,17 +33,6 @@ import java.util.ArrayList;
 class TestApp
 {
 
-	 @Test
-	 void testItem() {
-	 Item item = new Item(null, "TestItem", "This is a test item.", 5.00, 5);
-	
-	 assertEquals(item.getImage(), null);
-	 assertEquals(item.getName(), "TestItem");
-	 assertEquals(item.getDescription(), "This is a test item.");
-	 assertEquals(item.getPrice(), 5.00);
-	 assertEquals(item.getStock(), 5);
-	 }
-
 	// Also tests interfaces: PickUpable and Deliverable
 	 @Test
 	 void testChips() {

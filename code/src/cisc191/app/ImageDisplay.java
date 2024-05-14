@@ -113,7 +113,8 @@ public class ImageDisplay extends JPanel implements Scrollable
 	public void setImage(Image theImage)
 	{
 		image = theImage;
-		setPreferredSize(new Dimension(image.getWidth(this), image.getHeight(this)));
+		setPreferredSize(
+				new Dimension(image.getWidth(this), image.getHeight(this)));
 		repaint();
 	}
 
@@ -135,7 +136,8 @@ public class ImageDisplay extends JPanel implements Scrollable
 	 * @param direction   neg is up or left and pos is right or down
 	 * @return the unit increment for arrow clicks
 	 */
-	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction)
+	public int getScrollableUnitIncrement(Rectangle visibleRect,
+			int orientation, int direction)
 	{
 		return 1;
 	}
@@ -148,7 +150,8 @@ public class ImageDisplay extends JPanel implements Scrollable
 	 * @param direction   neg is up or left and pos is right or down
 	 * @return the block increment for clicking in scroll area
 	 */
-	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction)
+	public int getScrollableBlockIncrement(Rectangle visibleRect,
+			int orientation, int direction)
 	{
 		return 10;
 	}
@@ -195,18 +198,15 @@ public class ImageDisplay extends JPanel implements Scrollable
 		g.drawImage(image, 0, 0, this);
 
 		// check if the current index is in the image
-		if (currentX >= 0 && currentX < width && currentY >= 0 && currentY < height)
+		if (currentX >= 0 && currentX < width && currentY >= 0
+				&& currentY < height)
 		{
 
 			// check that the start and end values are visible
-			if (xStart < 0)
-				xStart = 0;
-			if (xEnd > maxX)
-				xEnd = maxX;
-			if (yStart < 0)
-				yStart = 0;
-			if (yEnd > maxY)
-				yEnd = maxY;
+			if (xStart < 0) xStart = 0;
+			if (xEnd > maxX) xEnd = maxX;
+			if (yStart < 0) yStart = 0;
+			if (yEnd > maxY) yEnd = maxY;
 
 			// draw a small cross at the current x and y in yellow
 			g.setColor(Color.yellow);
@@ -225,8 +225,7 @@ public class ImageDisplay extends JPanel implements Scrollable
 				g.drawLine(leftX, yStart, leftX, upY);
 			if (yStart <= upY && rightX <= maxX)
 				g.drawLine(rightX, yStart, rightX, upY);
-			if (upY >= 0 && rightX <= xEnd)
-				g.drawLine(rightX, upY, xEnd, upY);
+			if (upY >= 0 && rightX <= xEnd) g.drawLine(rightX, upY, xEnd, upY);
 			if (downY < height && rightX <= xEnd)
 				g.drawLine(rightX, downY, xEnd, downY);
 			if (downY <= yEnd && rightX < width)

@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,6 +17,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
+
+import cisc191.app.items.Item;
 
 class CartItemDisplay extends JPanel implements ListCellRenderer<String>
 {
@@ -45,7 +49,7 @@ class CartItemDisplay extends JPanel implements ListCellRenderer<String>
 				Container parent = CartItemDisplay.this.getParent();
 				if (parent instanceof JList)
 				{
-					JList list = (JList) parent;
+					JList<String> list = (JList<String>) parent;
 					DefaultListModel<String> model = (DefaultListModel<String>) list
 							.getModel();
 					int index = list.getSelectedIndex();
@@ -59,11 +63,21 @@ class CartItemDisplay extends JPanel implements ListCellRenderer<String>
 		add(removeButton, BorderLayout.EAST);
 	}
 
+	private JButton createIconButton(String letter, Color color)
+	{
+		JButton button = new JButton(letter);
+		button.setEnabled(false);
+		button.setBackground(color);
+		button.setMargin(new Insets(1, 1, 1, 1));
+		return button;
+	}
+
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list,
 			String value, int index, boolean isSelected, boolean cellHasFocus)
 	{
 		itemNameLabel.setText(value);
+
 		return this;
 	}
 }

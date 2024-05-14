@@ -18,7 +18,7 @@ import java.awt.Image;
  *         Represents an item in the app
  */
 
-public class Item
+public abstract class Item
 {
 
 	// Item has an image

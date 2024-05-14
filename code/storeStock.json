@@ -1,0 +1,112 @@
+{
+    "Apples": [
+        {
+            "Granny Smith Apple": {
+                "description": "A tasty apple.",
+                "image_file": "grannysmith.png",
+                "price": 3.99,
+                "stock": 7
+            },
+            "Honeycrisp Apple": {
+                "description": "A tasty apple.",
+                "image_file": "honeycrisp.png",
+                "price": 3.99,
+                "stock": 7
+            },
+            "Red Delicious Apple": {
+                "description": "A tasty apple.",
+                "image_file": "reddelicious.png",
+                "price": 2.99,
+                "stock": 7
+            },
+            "Fuji Apple": {
+                "description": "A tasty apple.",
+                "image_file": "fuji.png",
+                "price": 4.99,
+                "stock": 7
+            },
+            "Golden Delicious Apple": {
+                "description": "A tasty apple.",
+                "image_file": "goldendelicious.png",
+                "price": 3.99,
+                "stock": 7
+            },
+            "Gala Apple": {
+                "description": "A tasty apple.",
+                "image_file": "gala.png",
+                "price": 4.99,
+                "stock": 7
+            }
+        }
+    ],
+    "Chips": [
+        {
+            "Takis": {
+                "description": "These are takis.",
+                "image_file": "takis.png",
+                "price": 4.99,
+                "stock": 10
+            },
+            "Sun Chips": {
+                "description": "These are chips.",
+                "image_file": "sunchips.png",
+                "price": 5.99,
+                "stock": 12
+            },
+            "Lays Original Chips": {
+                "description": "These are chips.",
+                "image_file": "lays.png",
+                "price": 4.99,
+                "stock": 19
+            },
+            "Cheetos": {
+                "description": "These are cheetos.",
+                "image_file": "cheetos.png",
+                "price": 3.99,
+                "stock": 15
+            },
+            "Fritos Chips": {
+                "description": "These are chips.",
+                "image_file": "fritos.png",
+                "price": 4.99,
+                "stock": 13
+            },
+            "Lays BBQ Chips": {
+                "description": "These are chips.",
+                "image_file": "bbq.png",
+                "price": 4.99,
+                "stock": 15
+            },
+            "Ritz Crackers": {
+                "description": "These are crackers.",
+                "image_file": "ritz.png",
+                "price": 7.99,
+                "stock": 9
+            },
+            "Tostitos Chips": {
+                "description": "These are chips.",
+                "image_file": "tostitos.png",
+                "price": 5.99,
+                "stock": 18
+            },
+            "Cheez-its Crackers": {
+                "description": "These are crackers.",
+                "image_file": "cheezits.jpg",
+                "price": 8.99,
+                "stock": 12
+            },
+            "Ruffles Chips": {
+                "description": "These are chips.",
+                "image_file": "ruffles.png",
+                "price": 6.99,
+                "stock": 5
+            },
+            "Doritos Chips": {
+                "description": "These are chips.",
+                "image_file": "doritos.jpg",
+                "price": 6.99,
+                "stock": 16
+            }
+        }
+    ]
+}
