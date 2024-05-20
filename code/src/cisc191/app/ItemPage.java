@@ -81,8 +81,8 @@ public class ItemPage
 		// for each item in keyset
 		for (Item item : items.keySet())
 		{
-			// if item isn't invisible, break
-			if (items.get(item) != false) break;
+			// if item is invisible, continue
+			if (items.get(item) == false) continue;
 			// Create the ItemBox panel for the item
 			JPanel boxPanel = new ItemBox(item, cart);
 			boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
