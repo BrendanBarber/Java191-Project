@@ -219,28 +219,27 @@ public class ImageDisplay extends JPanel implements Scrollable
 			int rightX = currentX + 1;
 			int upY = currentY - 1;
 			int downY = currentY + 1;
-			
+
 			if (xStart <= leftX && upY >= 0)
 				g.drawLine(xStart, upY, leftX, upY);
-			
+
 			if (yStart <= upY && leftX >= 0)
 				g.drawLine(leftX, yStart, leftX, upY);
-			
+
 			if (yStart <= upY && rightX <= maxX)
 				g.drawLine(rightX, yStart, rightX, upY);
-			
-			if (upY >= 0 && rightX <= xEnd)
-				g.drawLine(rightX, upY, xEnd, upY);
-			
+
+			if (upY >= 0 && rightX <= xEnd) g.drawLine(rightX, upY, xEnd, upY);
+
 			if (downY < height && rightX <= xEnd)
 				g.drawLine(rightX, downY, xEnd, downY);
-			
+
 			if (downY <= yEnd && rightX < width)
 				g.drawLine(rightX, downY, rightX, yEnd);
-			
+
 			if (xStart <= leftX && downY < height)
 				g.drawLine(xStart, downY, leftX, downY);
-			
+
 			if (leftX >= 0 && downY <= yEnd)
 				g.drawLine(leftX, downY, leftX, yEnd);
 

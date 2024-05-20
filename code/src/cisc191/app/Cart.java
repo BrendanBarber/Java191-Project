@@ -59,7 +59,7 @@ public class Cart
 	private JPanel cartPanel;
 	// Cart has a button
 	private JButton cartButton;
-	
+
 	// Icons
 	private JPanel iconPanel;
 	private JButton deliverableButton;
@@ -173,7 +173,7 @@ public class Cart
 						DecimalFormat decimalFormat = new DecimalFormat("#.##");
 						String roundedTotal = decimalFormat.format(newTotal);
 						infoLabel.setText("Total: $" + roundedTotal);
-						
+
 						// update icons
 						updateIcons();
 					}
@@ -214,11 +214,11 @@ public class Cart
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				try 
+				try
 				{
 					checkOut();
 				}
-				catch(CartEmptyException e1) 
+				catch (CartEmptyException e1)
 				{
 					// Error message for when cart is empty
 					JOptionPane.showMessageDialog(null, e1.getMessage(),
@@ -227,7 +227,7 @@ public class Cart
 			}
 		});
 		buttonPanel.add(checkoutButton);
-		
+
 		// Icons for interfaces
 		iconPanel = new JPanel(new FlowLayout());
 
@@ -245,7 +245,7 @@ public class Cart
 		iconPanel.add(perishableButton);
 
 		updateIcons();
-		
+
 		buttonPanel.add(iconPanel);
 		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 		newWindow.add(mainPanel);
@@ -253,29 +253,29 @@ public class Cart
 		// Make the new window visible
 		newWindow.setVisible(true);
 	}
-	
-	private void updateIcons() 
+
+	private void updateIcons()
 	{
-		boolean[] iconVisible = {false, false, false};
-		
-		for(Item item : getItems()) 
+		boolean[] iconVisible = { false, false, false };
+
+		for (Item item : getItems())
 		{
-			if(item instanceof Deliverable) 
+			if (item instanceof Deliverable)
 			{
 				iconVisible[0] = true;
 			}
-			if(item instanceof PickUpable) 
+			if (item instanceof PickUpable)
 			{
 				iconVisible[1] = true;
 			}
-			if(item instanceof Perishable) 
+			if (item instanceof Perishable)
 			{
 				iconVisible[2] = true;
 			}
 		}
-		
+
 		// update icons
-		if(iconVisible[0] == true) 
+		if (iconVisible[0] == true)
 		{
 			deliverableButton.setBackground(Color.GREEN);
 		}
@@ -283,29 +283,29 @@ public class Cart
 		{
 			deliverableButton.setBackground(Color.GRAY);
 		}
-		
-		if(iconVisible[1] == true) 
+
+		if (iconVisible[1] == true)
 		{
 			pickupableButton.setBackground(Color.GREEN);
 		}
-		else 
+		else
 		{
 			pickupableButton.setBackground(Color.GRAY);
 		}
-		
-		if(iconVisible[2] == true)
+
+		if (iconVisible[2] == true)
 		{
 			perishableButton.setBackground(Color.GREEN);
 		}
-		else 
+		else
 		{
 			perishableButton.setBackground(Color.GRAY);
 		}
 	}
-	
-	private void checkOut() throws CartEmptyException 
+
+	private void checkOut() throws CartEmptyException
 	{
-		if(getItems().size() > 0)
+		if (getItems().size() > 0)
 		{
 			System.exit(0);
 		}
