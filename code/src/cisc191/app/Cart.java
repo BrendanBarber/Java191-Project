@@ -124,6 +124,7 @@ public class Cart
 				// if there is more than one item with the same name, append
 				// "xN"
 				itemName += " x" + itemCount;
+				itemName += "    ($" + item.getPrice() * itemCount + ")";
 				listModel.addElement(itemName);
 			}
 		}

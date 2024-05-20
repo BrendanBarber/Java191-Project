@@ -47,7 +47,7 @@ public class ItemPage
 	// ItemPage has many items that are visible or not
 	private HashMap<Item, Boolean> items;
 	// ItemPage has the topSix query responses
-	private JPanel[][] topSixItemBoxes = new JPanel[3][2];
+	private JPanel[][] topSixItemBoxes = new JPanel[2][3];
 	// ItemPage has a searchBar
 	private SearchBar searchBar;
 
@@ -92,12 +92,24 @@ public class ItemPage
 			// Separates and stores the top 6 search results
 			if (count < 6)
 			{
-				topSixItemBoxes[count % 3][(int) Math.floor(count / 3)] = boxPanel;
+				topSixItemBoxes[count / 3][count % 3] = boxPanel;
 				count++;
 			}
 
 			panel.add(boxPanel);
 		}
+		
+		for (int i = 0; i < topSixItemBoxes.length; i++) {
+	        for (int j = 0; j < topSixItemBoxes[i].length; j++) {
+	            if (topSixItemBoxes[i][j] != null) {
+	                if (i == 0) {
+	                    topSixItemBoxes[i][j].setBackground(Color.cyan);
+	                } else if (i == 1) {
+	                    topSixItemBoxes[i][j].setBackground(Color.yellow);
+	                }
+	            }
+	        }
+	    }
 	}
 
 	public void attachSearchBar(SearchBar searchBar)
