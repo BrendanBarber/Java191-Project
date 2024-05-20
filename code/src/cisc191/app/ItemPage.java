@@ -149,16 +149,20 @@ public class ItemPage
 		panel.repaint();
 	}
 	
-	public void loadStock(String fileName) {
+	public void loadStock(String fileName) 
+	{
         Gson gson = new Gson();
-        try (FileReader reader = new FileReader(fileName)) {
+        try (FileReader reader = new FileReader(fileName))
+	{
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
 
             // Extract Apples, iterate through each in the json, extract the needed information, and then create an object
             JsonArray applesArray = jsonObject.getAsJsonArray("Apples");
-            for (JsonElement appleElement : applesArray) {
+            for (JsonElement appleElement : applesArray) 
+	    {
                 JsonObject apple = appleElement.getAsJsonObject();
-                for (Map.Entry<String, JsonElement> key : apple.entrySet()) {
+                for (Map.Entry<String, JsonElement> key : apple.entrySet())
+		{
                     JsonObject details = key.getValue().getAsJsonObject();
                     addItem(new Apple(ImageIO.read(new File(details.get("image_file").getAsString())),
                             key.getKey(), details.get("description").getAsString(),
@@ -168,16 +172,20 @@ public class ItemPage
 
             // Extract Chips, iterate through each in the json, extract the needed information, and then create an object
             JsonArray chipsArray = jsonObject.getAsJsonArray("Chips");
-            for (JsonElement chipsElement : chipsArray) {
+            for (JsonElement chipsElement : chipsArray) 
+	    {
                 JsonObject chips = chipsElement.getAsJsonObject();
-                for (Map.Entry<String, JsonElement> key : chips.entrySet()) {
+                for (Map.Entry<String, JsonElement> key : chips.entrySet()) 
+		{
                     JsonObject details = key.getValue().getAsJsonObject();
                     addItem(new Chips(ImageIO.read(new File(details.get("image_file").getAsString())),
                     		key.getKey(), details.get("description").getAsString(),
                             details.get("price").getAsDouble(), details.get("stock").getAsInt()));
                 }
             }
-        } catch (IOException e) {
+        } 
+	catch (IOException e)
+	{
             e.printStackTrace();
         }
     }
