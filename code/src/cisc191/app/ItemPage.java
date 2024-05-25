@@ -82,23 +82,26 @@ public class ItemPage
 		for (Item item : items.keySet())
 		{
 			// if item is invisible, continue
-			if (items.get(item) == false) continue;
-			// Create the ItemBox panel for the item
-			JPanel boxPanel = new ItemBox(item, cart);
-			boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			boxPanel.setBackground(Color.LIGHT_GRAY);
-			boxPanel.setPreferredSize(new Dimension(100, 75));
+			if (items.get(item) != false)
+    			{
+        			// Create the ItemBox panel for the item
+        			JPanel boxPanel = new ItemBox(item, cart);
+        			boxPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				boxPanel.setBackground(Color.LIGHT_GRAY);
+				boxPanel.setPreferredSize(new Dimension(100, 75));
 
-			// Separates and stores the top 6 search results
-			if (count < 6)
-			{
-				topSixItemBoxes[count / 3][count % 3] = boxPanel;
-				count++;
-			}
+        			// Separates and stores the top 6 search results
+        			if (count < 6)
+        			{
+    					topSixItemBoxes[count / 3][count % 3] = boxPanel;
+            				count++;
+        			}
 
-			panel.add(boxPanel);
+        			panel.add(boxPanel);
+    			}
+
 		}
-
+		
 		for (int i = 0; i < topSixItemBoxes.length; i++)
 		{
 			for (int j = 0; j < topSixItemBoxes[i].length; j++)
