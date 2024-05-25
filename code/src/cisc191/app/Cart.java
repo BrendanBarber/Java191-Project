@@ -159,10 +159,12 @@ public class Cart
 							if (item.getName().equals(shortName))
 							{
 								iterator.remove(); // Safely remove the item
-								continue;
 							}
-							// add to total
-							newTotal += item.getPrice();
+							else
+							{
+								// add to total
+								newTotal += item.getPrice();
+							}
 						}
 						// remove list item
 						listModel.remove(selectedIndex);
