@@ -81,7 +81,7 @@ public class ItemPage
 		// for each item in keyset
 		for (Item item : items.keySet())
 		{
-			// if item is invisible, continue
+			// skip invisible items
 			if (items.get(item) != false)
     			{
         			// Create the ItemBox panel for the item
